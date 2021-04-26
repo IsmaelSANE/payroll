@@ -146,3 +146,14 @@ def compute_tax_withheld
   i, f = tax_withheld_unrounded.to_s.split('.')
   $tax_withheld = [i, f[0..1]].join('.').to_f
 end
+
+#Initialisation
+set_totals_to_zero()
+print_headings()
+get_payroll_record($payroll_records)
+
+#Proccessing loop
+process_payroll_records()
+
+#Termination
+print_line_of_totals()
