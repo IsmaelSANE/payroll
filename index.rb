@@ -34,6 +34,11 @@ $employee_name = ''
 $line_width = 135
 $count = 0
 
+def round_number(number)
+  i, f = number.to_s.split('.')
+  number = [i, f[0..1]].join('.').to_f
+end
+
 def get_payroll_record(array)
   $employee_number =  array[$count][:EMPLOYEE_NUMBER]
   $employee_name =  array[$count][:EMPLOYEE_NAME]
@@ -76,7 +81,7 @@ def process_payroll_records
     compute_net_pay()
     print_line_of_report()
     accumulate_totals()
-    $count += 1
+   $count += 1
     get_payroll_record($payroll_records) unless $count == $payroll_records.length
   end
 end
@@ -96,55 +101,45 @@ end
 def compute_net_pay
   compute_gross_pay()
   compute_tax_withheld()
-  net_pay_unrounded = $gross_pay - $tax_withheld
-  i, f = net_pay_unrounded.to_s.split('.')
-  $net_pay = [i, f[0..1]].join('.').to_f
+  net_pay = $gross_pay - $tax_withheld
+ $net_pay = round_number(net_pay)
 end
 
 def accumulate_totals
-  regular_pay_total_unrounded = $regular_pay_total + $regular_pay
-  i, f = regular_pay_total_unrounded.to_s.split('.')
-  $regular_pay_total = [i, f[0..1]].join('.').to_f
+   regular_pay_total = $regular_pay_total + $regular_pay
+  $regular_pay_total = round_number(regular_pay_total)
 
-  overtime_pay_total_unrounded = $overtime_pay_total + $overtime_pay
-  i, f = overtime_pay_total_unrounded.to_s.split('.')
-  $overtime_pay_total = [i, f[0..1]].join('.').to_f
+   overtime_pay_total = $overtime_pay_total + $overtime_pay
+  $overtime_pay_total = round_number(overtime_pay_total)
 
-  gross_pay_total_unrounded = $gross_pay_total + $gross_pay
-  i, f = gross_pay_total_unrounded.to_s.split('.')
-  $gross_pay_total = [i, f[0..1]].join('.').to_f
+   gross_pay_total = $gross_pay_total + $gross_pay
+  $gross_pay_total = round_number(gross_pay_total)
 
-  tax_withheld_total_unrounded = $tax_withheld_total + $tax_withheld
-  i, f = tax_withheld_total_unrounded.to_s.split('.')
-  $tax_withheld_total = [i, f[0..1]].join('.').to_f
+   tax_withheld_total = $tax_withheld_total + $tax_withheld
+  $tax_withheld_total = round_number(tax_withheld_total)
 
-  net_pay_total_unrounded = $net_pay_total + $net_pay
-  i, f = net_pay_total_unrounded.to_s.split('.')
-  $net_pay_total = [i, f[0..1]].join('.').to_f
+   net_pay_total = $net_pay_total + $net_pay
+  $net_pay_total = round_number(net_pay_total)
 end
 
 def compute_gross_pay
   if $hours_worked >= 40
     $regular_pay = $hourly_pay_rate * 40
-    overtime_pay_unrounded = ($hours_worked - 40) * (1.5 * $hourly_pay_rate)
-    i, f = overtime_pay_unrounded.to_s.split('.')
-    $overtime_pay = [i, f[0..1]].join('.').to_f
-    gross_pay_unrounded = $regular_pay + overtime_pay_unrounded
-    i, f = gross_pay_unrounded.to_s.split('.')
-    $gross_pay = [i, f[0..1]].join('.').to_f
+     overtime_pay = ($hours_worked - 40) * (1.5 * $hourly_pay_rate)
+     $overtime_pay = round_number(overtime_pay)
+     gross_pay = $regular_pay + overtime_pay
+    $gross_pay = round_number(gross_pay)
   else
     $regular_pay = $hours_worked * $hourly_pay_rate
     $overtime_pay = 0
-    gross_pay_unrounded = $regular_pay
-    i, f = gross_pay_unrounded.to_s.split('.')
-    $gross_pay = [i, f[0..1]].join('.').to_f
+     gross_pay = $regular_pay
+    $gross_pay = round_number(gross_pay)
   end
 end
 
 def compute_tax_withheld
-  tax_withheld_unrounded = $gross_pay * 0.15
-  i, f = tax_withheld_unrounded.to_s.split('.')
-  $tax_withheld = [i, f[0..1]].join('.').to_f
+   tax_withheld = $gross_pay * 0.15
+  $tax_withheld = round_number(tax_withheld)
 end
 
 #Initialisation
