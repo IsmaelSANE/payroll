@@ -42,8 +42,8 @@ end
 def get_payroll_record(array)
   $employee_number =  array[$count][:EMPLOYEE_NUMBER]
   $employee_name =  array[$count][:EMPLOYEE_NAME]
-  hourly_pay =  array[$count][:HOURLY_RATE].split('')
-  hourly_pay.shift
+   hourly_pay =  array[$count][:HOURLY_RATE].split('')
+   hourly_pay.shift
   $hourly_pay_rate = hourly_pay.join.to_f
   $hours_worked =  array[$count][:HOURS_WORKED].to_f
 end
@@ -63,7 +63,7 @@ def print_line_of_totals
   print ("$#{$overtime_pay_total}".center(12))+(' '*3)
   print ("$#{$gross_pay_total}".center(9))+(' '*3)
   print ("$#{$tax_withheld_total}".center(11))+(' '*3)
-  puts  ("$#{$net_pay_total}".center(11))
+  puts  (' ')+("$#{$net_pay_total}".center(11))
 end
 
 def print_headings
@@ -108,16 +108,12 @@ end
 def accumulate_totals
    regular_pay_total = $regular_pay_total + $regular_pay
   $regular_pay_total = round_number(regular_pay_total)
-
    overtime_pay_total = $overtime_pay_total + $overtime_pay
   $overtime_pay_total = round_number(overtime_pay_total)
-
    gross_pay_total = $gross_pay_total + $gross_pay
   $gross_pay_total = round_number(gross_pay_total)
-
    tax_withheld_total = $tax_withheld_total + $tax_withheld
   $tax_withheld_total = round_number(tax_withheld_total)
-
    net_pay_total = $net_pay_total + $net_pay
   $net_pay_total = round_number(net_pay_total)
 end
@@ -126,7 +122,7 @@ def compute_gross_pay
   if $hours_worked >= 40
     $regular_pay = $hourly_pay_rate * 40
      overtime_pay = ($hours_worked - 40) * (1.5 * $hourly_pay_rate)
-     $overtime_pay = round_number(overtime_pay)
+    $overtime_pay = round_number(overtime_pay)
      gross_pay = $regular_pay + overtime_pay
     $gross_pay = round_number(gross_pay)
   else
@@ -138,8 +134,8 @@ def compute_gross_pay
 end
 
 def compute_tax_withheld
-   tax_withheld = $gross_pay * 0.15
-  $tax_withheld = round_number(tax_withheld)
+  tax_withheld = $gross_pay * 0.15
+ $tax_withheld = round_number(tax_withheld)
 end
 
 #Initialisation
