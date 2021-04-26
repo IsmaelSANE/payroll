@@ -83,7 +83,7 @@ end
 
 def print_line_of_report
   print +(' '*2)+("#{$employee_number}".center(15))+(' '*3)
-  print ("#{$employee_name}".center(19))+(' '*3)
+  print ("#{$employee_name}".ljust(19))+(' '*3)
   print ("$#{$hourly_pay_rate}".center(11))+(' '*3)
   print ("#{$hours_worked}".center(12))+(' '*3)
   print ("$#{$regular_pay}".center(11))+(' '*3)
