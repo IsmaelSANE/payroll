@@ -64,6 +64,8 @@ def print_line_of_totals
   print ("$#{$gross_pay_total}".center(9))+(' '*3)
   print ("$#{$tax_withheld_total}".center(11))+(' '*3)
   puts  (' ')+("$#{$net_pay_total}".center(11))
+  puts ''
+  puts ''
 end
 
 def print_headings
@@ -72,7 +74,9 @@ def print_headings
   puts("WEEKLY PAYROLL REPORT".center($line_width))
   puts ''
   puts ''
-  puts("  EMPLOYEE NUMBER      EMPLOYEE NAME      HOURLY RATE   HOURS WORKED  REGULAR PAY   OVERTIME PAY   GROSS PAY   TAX WITHHELD     NET PAY")
+  print("  EMPLOYEE NUMBER      EMPLOYEE NAME      HOURLY RATE   HOURS WORKED")
+  print("  REGULAR PAY   OVERTIME PAY   GROSS PAY   TAX WITHHELD     NET PAY")
+  puts ''
   puts ''
 end
 
@@ -87,14 +91,14 @@ def process_payroll_records
 end
 
 def print_line_of_report
-  print +(' '*2)+("#{$employee_number}".center(15))+(' '*3)
-  print ("#{$employee_name}".ljust(19))+(' '*3)
+  print +(' '*2)+("#{$employee_number}".center(15))+(' '*4)
+  print ("#{$employee_name}".ljust(19))+(' '*2)
   print ("$#{$hourly_pay_rate}".center(11))+(' '*3)
-  print ("#{$hours_worked}".center(12))+(' '*3)
+  print ("#{$hours_worked}".center(12))+(' '*2)
   print ("$#{$regular_pay}".center(11))+(' '*3)
   print ("$#{$overtime_pay}".center(12))+(' '*3)
   print ("$#{$gross_pay}".center(9))+(' '*3)
-  print ("$#{$tax_withheld}".center(11))+(' '*3)
+  print ("$#{$tax_withheld}".center(11))+(' '*4)
   puts  ("$#{$net_pay}".center(11))
 end
 
