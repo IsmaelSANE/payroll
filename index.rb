@@ -15,24 +15,38 @@ $payroll_records = [ {EMPLOYEE_NUMBER: '0012345', EMPLOYEE_NAME: 'JOE SUDDS',
 
                     {EMPLOYEE_NUMBER: '0067890', EMPLOYEE_NAME: 'JAMES FRITZ',
                      HOURLY_RATE: '$21.00', HOURS_WORKED: '50.50'} ]
-$overtime_pay = 0
-$regular_pay = 0
-$gross_pay = 0
-$tax_withheld = 0
-$net_pay = 0
-$hourly_pay_rate = 0
-$hours_worked = 0
-$regular_pay_total = 0
-$overtime_pay_total = 0
-$gross_pay_total = 0
-$tax_withheld_total = 0
-$net_pay_total = 0
 
-$employee_number = ''
-$employee_name = ''
+def prepare_payroll_repport
+  $overtime_pay = 0
+  $regular_pay = 0
+  $gross_pay = 0
+  $tax_withheld = 0
+  $net_pay = 0
+  $hourly_pay_rate = 0
+  $hours_worked = 0
+  $regular_pay_total = 0
+  $overtime_pay_total = 0
+  $gross_pay_total = 0
+  $tax_withheld_total = 0
+  $net_pay_total = 0
 
-$line_width = 135
-$count = 0
+  $employee_number = ''
+  $employee_name = ''
+
+  $line_width = 135
+  $count = 0
+
+  #Initialisation
+  set_totals_to_zero()
+  print_headings()
+  get_payroll_record($payroll_records)
+
+  #Proccessing loop
+  process_payroll_records()
+
+  #Termination
+  print_line_of_totals()
+end
 
 def round_number(number)
   i, f = number.to_s.split('.')
@@ -142,13 +156,5 @@ def compute_tax_withheld
  $tax_withheld = round_number(tax_withheld)
 end
 
-#Initialisation
-set_totals_to_zero()
-print_headings()
-get_payroll_record($payroll_records)
 
-#Proccessing loop
-process_payroll_records()
-
-#Termination
-print_line_of_totals()
+prepare_payroll_repport()
